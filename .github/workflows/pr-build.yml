@@ -1,9 +1,5 @@
 name: Build Nextra Docs (PR)
 
-defaults:
-  run:
-    working-directory: website
-
 on:
   pull_request:
     branches:
@@ -33,8 +29,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+        working-directory: website
 
       - name: Build (Next + export)
         env:
           NODE_ENV: production
         run: pnpm build
+        working-directory: website
