@@ -1,5 +1,9 @@
 name: Build Nextra Docs (PR)
 
+defaults:
+  run:
+    working-directory: website
+
 on:
   pull_request:
     branches:
@@ -9,10 +13,6 @@ jobs:
   build:
     if: github.head_ref == 'website'
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./website
 
     steps:
       - name: Checkout

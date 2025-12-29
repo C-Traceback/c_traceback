@@ -1,5 +1,9 @@
 name: Deploy Nextra Docs to GitHub Pages
 
+defaults:
+  run:
+    working-directory: website
+
 on:
   push:
     branches:
@@ -18,10 +22,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./website
 
     steps:
       - name: Checkout

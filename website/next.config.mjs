@@ -9,9 +9,10 @@ const isProd = process.env.NODE_ENV === 'production'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // needed for static export with Next 13+
+  output: 'export',
   basePath: isProd ? '/c_traceback' : '',
   assetPrefix: isProd ? '/c_traceback/' : '',
+  images: { unoptimized: true }
 }
 
 export default withNextra(nextConfig);
