@@ -202,7 +202,7 @@ int get_parent_path_length(const char *restrict path)
     }
     else
     {
-        return (int)(last_separator - path);
+        return (int)(last_separator - path) + 1;
     }
 }
 
