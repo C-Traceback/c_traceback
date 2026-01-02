@@ -13,10 +13,11 @@
 
 #ifndef ctb_thread_local
 #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L
-/* C23 made 'thread_local' a standard keyword. Do nothing. */
+/* C23 made 'thread_local' a standard keyword; map to it. */
+#define ctb_thread_local thread_local
 #elif defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
-/* C11 provides _Thread_local.
-   Ideally, include <threads.h> which defines thread_local. */
+/* C11 provides the _Thread_local storage-class specifier.
+   Map ctb_thread_local to _Thread_local for thread-local storage. */
 #define ctb_thread_local _Thread_local
 #elif defined(__GNUC__) || defined(__clang__) || defined(__MINGW32__)
 /* GCC, Clang, and MinGW use __thread for C99 */
