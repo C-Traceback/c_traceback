@@ -60,17 +60,16 @@ void ctb_raise_error(
 )
 {
     CTB_Context *context = get_context();
-    (context->num_errors)++;
 
     const int num_errors = context->num_errors;
     if (num_errors >= 0 && num_errors < CTB_MAX_NUM_ERROR)
     {
-        CTB_Error_Snapshot_ *error_snapshot =
-            &(context->error_snapshots[num_errors - 1]);
+        CTB_Error_Snapshot_ *error_snapshot = &(context->error_snapshots[num_errors]);
         ctb_setup_error_snapshot_core(context, error_snapshot, error, file, line, func);
-
         snprintf(error_snapshot->error_message, CTB_MAX_ERROR_MESSAGE_LENGTH, "%s", msg);
     }
+
+    (context->num_errors)++;
 }
 
 void ctb_raise_error_fmt(
@@ -83,13 +82,11 @@ void ctb_raise_error_fmt(
 )
 {
     CTB_Context *context = get_context();
-    (context->num_errors)++;
 
     const int num_errors = context->num_errors;
     if (num_errors >= 0 && num_errors < CTB_MAX_NUM_ERROR)
     {
-        CTB_Error_Snapshot_ *error_snapshot =
-            &(context->error_snapshots[num_errors - 1]);
+        CTB_Error_Snapshot_ *error_snapshot = &(context->error_snapshots[num_errors]);
         ctb_setup_error_snapshot_core(context, error_snapshot, error, file, line, func);
 
         va_list args;
@@ -99,6 +96,8 @@ void ctb_raise_error_fmt(
         );
         va_end(args);
     }
+
+    (context->num_errors)++;
 }
 
 bool ctb_check_error_occurred(void)
